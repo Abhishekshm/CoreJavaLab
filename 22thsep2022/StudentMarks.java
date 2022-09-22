@@ -1,7 +1,7 @@
 /*
 Program: creating student object  and prnting marks >90
 @author: Abhishek Sharma
-@date: 19th sept 2022
+@date: 22th sept 2022
 */
 import java.util.Scanner; //importing Scanner class 
 class StudentMarks //declaring class StudentMarks
