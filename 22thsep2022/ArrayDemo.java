@@ -32,7 +32,7 @@ class arrayayDemo
 		sorting(array); //calling sorting
 		System.out.println(); //printing new line
 		System.out.println("After removing duplicate entries Array become :"); //printing statement before output
-        deleteDuplicate(array); //calling deleteDuplicate
+          	deleteDuplicate(array); //calling deleteDuplicate
 	}//end of method inputarray
 	
 	//method for finding duplicate Elements in Array
@@ -57,11 +57,11 @@ class arrayayDemo
    //method for sorting array
 	static void sorting(int sarray[])
 	{
-		 System.out.println(); //printing new line
-		 System.out.println("After sorting arrayay elements are:");  //printing statement before output
-        Arrays.sort(sarray); // method for sorting array elements	 
-		displayArray(sarray); //calling displayArray
-		System.out.println(); //printing new line
+		  System.out.println(); //printing new line
+		  System.out.println("After sorting arrayay elements are:");  //printing statement before output
+      	 	  Arrays.sort(sarray); // method for sorting array elements	 
+		  displayArray(sarray); //calling displayArray
+		  System.out.println(); //printing new line
 	}
 	
 	//method for display Array
