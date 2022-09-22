@@ -25,7 +25,7 @@ class arrayayDemo
 	     	array[i]= sc.nextInt(); //taking input
 		}
 		System.out.println("Arrays elements are:"); //printing statement before output
-        displayArray(array); //calling displayArray
+       		 displayArray(array); //calling displayArray
 		System.out.println(); //printing new line
 		System.out.println(); //printing new line
 		duplicate(array); //calling displayArray
