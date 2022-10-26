@@ -1,4 +1,4 @@
-package com.EmployeManagementSystem;
+package com.Lab_Assessmnet_26_10_22;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
