@@ -1,0 +1,226 @@
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 48
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2022, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database Labdb;
+Query OK, 1 row affected (0.04 sec)
+
+mysql> use Labdb;
+Database changed
+mysql> create table manga(
+    -> m_id int not null,
+    -> m_name varchar(20) not null,
+    -> m_publisher varchar(40) not null,
+    -> primary key(m_id)
+    -> );
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> desc manga;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| m_id        | int         | NO   | PRI | NULL    |       |
+| m_name      | varchar(20) | NO   |     | NULL    |       |
+| m_publisher | varchar(40) | NO   |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into manga values(1,'Spy-family','Tatsuya Endo');
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into manga values(2,'HunterXHunter','Yoshihiro Togashi');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into manga values(3,'Naruto','Rumiko Takahashi');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into manga values(4,'One_Piece','Eiichiro Oda');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> insert into manga values(5,'Dragon Ball Z',' Akira Toriyama');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into manga values(6,'Black Jack',' Osama Tezuka ');
+Query OK, 1 row affected (0.08 sec)
+
+mysql> create table Anime(
+    -> a_id int not null,
+    -> a_name varchar(40) not null,
+    -> a_seasons int not null,
+    -> primary key(a_id));
+Query OK, 0 rows affected (0.12 sec)
+
+mysql> desc Anime;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| a_id      | int         | NO   | PRI | NULL    |       |
+| a_name    | varchar(40) | NO   |     | NULL    |       |
+| a_seasons | int         | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into Anime values(1,'My Hero Academia',6);
+Query OK, 1 row affected (0.08 sec)
+
+mysql> insert into Anime values(2,'Death Note',2);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Anime values(3,'Leauge of Legends',1);
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into Anime values(4,'Mob Psycho 100',3);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into Anime values(5,'Demon Slayer',3);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from manga;
++------+---------------+-------------------+
+| m_id | m_name        | m_publisher       |
++------+---------------+-------------------+
+|    1 | Spy-family    | Tatsuya Endo      |
+|    2 | HunterXHunter | Yoshihiro Togashi |
+|    3 | Naruto        | Rumiko Takahashi  |
+|    4 | One_Piece     | Eiichiro Oda      |
+|    5 | Dragon Ball Z |  Akira Toriyama   |
+|    6 | Black Jack    |  Osama Tezuka     |
++------+---------------+-------------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from Anime;
++------+-------------------+-----------+
+| a_id | a_name            | a_seasons |
++------+-------------------+-----------+
+|    1 | My Hero Academia  |         6 |
+|    2 | Death Note        |         2 |
+|    3 | Leauge of Legends |         1 |
+|    4 | Mob Psycho 100    |         3 |
+|    5 | Demon Slayer      |         3 |
++------+-------------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select manga.m_name,Anime.a_name,Anime.a_seasons
+    -> from manga
+    -> INNER JOIN Anime
+    -> ON manga.m_id=Anime.a_id;
++---------------+-------------------+-----------+
+| m_name        | a_name            | a_seasons |
++---------------+-------------------+-----------+
+| Spy-family    | My Hero Academia  |         6 |
+| HunterXHunter | Death Note        |         2 |
+| Naruto        | Leauge of Legends |         1 |
+| One_Piece     | Mob Psycho 100    |         3 |
+| Dragon Ball Z | Demon Slayer      |         3 |
++---------------+-------------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select manga.m_name,Anime.a_name,Anime.a_seasons
+    -> from manga
+    -> LEFT JOIN Anime
+    -> ON manga.m_id=Anime.a_id;
++---------------+-------------------+-----------+
+| m_name        | a_name            | a_seasons |
++---------------+-------------------+-----------+
+| Spy-family    | My Hero Academia  |         6 |
+| HunterXHunter | Death Note        |         2 |
+| Naruto        | Leauge of Legends |         1 |
+| One_Piece     | Mob Psycho 100    |         3 |
+| Dragon Ball Z | Demon Slayer      |         3 |
+| Black Jack    | NULL              |      NULL |
++---------------+-------------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql> select manga.m_name,Anime.a_name,Anime.a_seasons
+    -> from manga
+    -> RIGHT JOIN Anime
+    -> ON manga.m_id=Anime.a_id;
++---------------+-------------------+-----------+
+| m_name        | a_name            | a_seasons |
++---------------+-------------------+-----------+
+| Spy-family    | My Hero Academia  |         6 |
+| HunterXHunter | Death Note        |         2 |
+| Naruto        | Leauge of Legends |         1 |
+| One_Piece     | Mob Psycho 100    |         3 |
+| Dragon Ball Z | Demon Slayer      |         3 |
++---------------+-------------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from manga full join anime;
++------+---------------+-------------------+------+-------------------+-----------+
+| m_id | m_name        | m_publisher       | a_id | a_name            | a_seasons |
++------+---------------+-------------------+------+-------------------+-----------+
+|    1 | Spy-family    | Tatsuya Endo      |    5 | Demon Slayer      |         3 |
+|    1 | Spy-family    | Tatsuya Endo      |    4 | Mob Psycho 100    |         3 |
+|    1 | Spy-family    | Tatsuya Endo      |    3 | Leauge of Legends |         1 |
+|    1 | Spy-family    | Tatsuya Endo      |    2 | Death Note        |         2 |
+|    1 | Spy-family    | Tatsuya Endo      |    1 | My Hero Academia  |         6 |
+|    2 | HunterXHunter | Yoshihiro Togashi |    5 | Demon Slayer      |         3 |
+|    2 | HunterXHunter | Yoshihiro Togashi |    4 | Mob Psycho 100    |         3 |
+|    2 | HunterXHunter | Yoshihiro Togashi |    3 | Leauge of Legends |         1 |
+|    2 | HunterXHunter | Yoshihiro Togashi |    2 | Death Note        |         2 |
+|    2 | HunterXHunter | Yoshihiro Togashi |    1 | My Hero Academia  |         6 |
+|    3 | Naruto        | Rumiko Takahashi  |    5 | Demon Slayer      |         3 |
+|    3 | Naruto        | Rumiko Takahashi  |    4 | Mob Psycho 100    |         3 |
+|    3 | Naruto        | Rumiko Takahashi  |    3 | Leauge of Legends |         1 |
+|    3 | Naruto        | Rumiko Takahashi  |    2 | Death Note        |         2 |
+|    3 | Naruto        | Rumiko Takahashi  |    1 | My Hero Academia  |         6 |
+|    4 | One_Piece     | Eiichiro Oda      |    5 | Demon Slayer      |         3 |
+|    4 | One_Piece     | Eiichiro Oda      |    4 | Mob Psycho 100    |         3 |
+|    4 | One_Piece     | Eiichiro Oda      |    3 | Leauge of Legends |         1 |
+|    4 | One_Piece     | Eiichiro Oda      |    2 | Death Note        |         2 |
+|    4 | One_Piece     | Eiichiro Oda      |    1 | My Hero Academia  |         6 |
+|    5 | Dragon Ball Z |  Akira Toriyama   |    5 | Demon Slayer      |         3 |
+|    5 | Dragon Ball Z |  Akira Toriyama   |    4 | Mob Psycho 100    |         3 |
+|    5 | Dragon Ball Z |  Akira Toriyama   |    3 | Leauge of Legends |         1 |
+|    5 | Dragon Ball Z |  Akira Toriyama   |    2 | Death Note        |         2 |
+|    5 | Dragon Ball Z |  Akira Toriyama   |    1 | My Hero Academia  |         6 |
+|    6 | Black Jack    |  Osama Tezuka     |    5 | Demon Slayer      |         3 |
+|    6 | Black Jack    |  Osama Tezuka     |    4 | Mob Psycho 100    |         3 |
+|    6 | Black Jack    |  Osama Tezuka     |    3 | Leauge of Legends |         1 |
+|    6 | Black Jack    |  Osama Tezuka     |    2 | Death Note        |         2 |
+|    6 | Black Jack    |  Osama Tezuka     |    1 | My Hero Academia  |         6 |
++------+---------------+-------------------+------+-------------------+-----------+
+30 rows in set (0.00 sec)
+
+mysql> select manga.m_name,Anime.a_name,Anime.a_seasons
+    -> from Anime
+    -> LEFT JOIN manga
+    -> ON manga.m_id=Anime.a_id;
++---------------+-------------------+-----------+
+| m_name        | a_name            | a_seasons |
++---------------+-------------------+-----------+
+| Spy-family    | My Hero Academia  |         6 |
+| HunterXHunter | Death Note        |         2 |
+| Naruto        | Leauge of Legends |         1 |
+| One_Piece     | Mob Psycho 100    |         3 |
+| Dragon Ball Z | Demon Slayer      |         3 |
++---------------+-------------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select manga.m_name,Anime.a_name,Anime.a_seasons
+    -> from Anime
+    -> RIGHT JOIN manga
+    -> ON manga.m_id=Anime.a_id;
++---------------+-------------------+-----------+
+| m_name        | a_name            | a_seasons |
++---------------+-------------------+-----------+
+| Spy-family    | My Hero Academia  |         6 |
+| HunterXHunter | Death Note        |         2 |
+| Naruto        | Leauge of Legends |         1 |
+| One_Piece     | Mob Psycho 100    |         3 |
+| Dragon Ball Z | Demon Slayer      |         3 |
+| Black Jack    | NULL              |      NULL |
++---------------+-------------------+-----------+
+6 rows in set (0.00 sec)
+
+mysql>
